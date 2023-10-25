@@ -16,7 +16,9 @@ export class NewsService {
 
   getNewsHeadLines(): Observable<Article[]> {
 
-    return this.http.get<NewsResponse>(`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}`).
+    return this.http.get<NewsResponse>(`https://newsapi.org/v2/top-headlines?country=us&category=business`,{
+      params: {apiKey}
+    }).
       pipe(
         map(resp => resp.articles)
       );
@@ -24,12 +26,14 @@ export class NewsService {
   }
 
 
-  getToHeadLinesByCategory(categoria: string): Observable<Article[]>{
-     
-    return this.http.get<NewsResponse>(`https://newsapi.org/v2/top-headlines?apiKey=${apiKey}&country=us`).
-    pipe(
-      map(resp => resp.articles)
-    );
+  getToHeadLinesByCategory(categoria: string): Observable<Article[]> {
+
+    return this.http.get<NewsResponse>(`https://newsapi.org/v2/top-headlines?country=us&category=${categoria}`,{
+      params: {apiKey}
+    }).
+      pipe(
+        map(resp => resp.articles)
+      );
   }
 
 
