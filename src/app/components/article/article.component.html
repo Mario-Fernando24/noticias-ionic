@@ -8,13 +8,11 @@
     {{ article.title }}
   </ion-card-title>
 
-  <ion-img
-   *ngIf="article.urlToImage"
-   [src]="article.urlToImage" 
-  ></ion-img>
+  <ion-img class="imagen-size"
+    [src]="article.urlToImage?article.urlToImage
+  : 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Imagen_no_disponible.svg/1200px-Imagen_no_disponible.svg.png'"></ion-img>
 
-  <ion-card-content
-  *ngIf="article.description">
+  <ion-card-content *ngIf="article.description">
     <p>{{ article.description }}</p>
   </ion-card-content>
 </ion-card>

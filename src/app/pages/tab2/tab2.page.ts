@@ -15,7 +15,8 @@ export class Tab2Page {
 
   //recibo una categoria
   segmentChanged(categoria: any) {
-    console.log(categoria);
+    this.selectedCategory = categoria.detail.value;
+    console.log(categoria.detail.value);
 
   }
 
