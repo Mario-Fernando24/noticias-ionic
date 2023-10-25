@@ -16,7 +16,7 @@ export class NewsService {
 
   getNewsHeadLines(): Observable<Article[]> {
 
-    return this.http.get<NewsResponse>(`https://newsapi.org/v2/top-headlines?apiKey=${apiKey}&category=business`).
+    return this.http.get<NewsResponse>(`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}`).
       pipe(
         map(resp => resp.articles)
       );
