@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 const apiKey = environment.apiKey;
-
+const apiUrl = environment.apiUrl;
 @Injectable({
   providedIn: 'root'
 })
@@ -14,15 +14,18 @@ export class NewsService {
 
   constructor(private http: HttpClient) { }
 
+  // centralizar generico T K
+  private executeQuery<T>(endpoint: string){
+      return this.http.get<any>(`${apiUrl}${endpoint} `,{
+        params: {apiKey}
+      })
+  }
+
   getNewsHeadLines(): Observable<Article[]> {
 
-    return this.http.get<NewsResponse>(`https://newsapi.org/v2/top-headlines?country=us&category=business`,{
-      params: {apiKey}
-    }).
+    return this.executeQuery(`/top-headlines?country=us&category=business`).
       pipe(
-        map(resp => resp.articles)
-      );
-
+        map(({resp}) => resp));
   }
 
 
